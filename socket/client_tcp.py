@@ -9,13 +9,13 @@ import zlib
 n_sample = 100
 delay = 0.1
 
-# img_path = "./../../test_img/112x112.jpg"
+# img_path = "../test_img/112x112.jpg"
 # size = 3790
 
-# img_path = "./../../test_img/224x224.jpg"
+# img_path = "../test_img/224x224.jpg"
 # size = 9824
 
-img_path = "./../../test_img/640x640.jpg"
+img_path = "../test_img/640x640.jpg"
 size = 47684
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
