@@ -8,7 +8,7 @@ import zlib
 import time
 
 HOST='0.0.0.0'
-PORT=8081
+PORT=8080
 
 s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 print('Socket created')
@@ -50,7 +50,7 @@ while True:
     print('network_time_ms: {}'.format(network_time_ms))
     # Write result file
     count += 1
-    with open("result.txt", "a") as file_object:
+    with open("result.csv", "a") as file_object:
         file_object.write('{},{}\n'.format(count, network_time_ms))
 
     # Image

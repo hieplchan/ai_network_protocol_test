@@ -19,7 +19,7 @@ def protocol_test():
 
     # Write result file
     count += 1
-    with open("result.txt", "a") as file_object:
+    with open("result.csv", "a") as file_object:
         file_object.write('{},{}\n'.format(count, network_time_ms))
 
     return {
