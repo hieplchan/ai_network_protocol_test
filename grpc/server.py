@@ -26,7 +26,7 @@ class ImageProcess(imageprocess_pb2_grpc.ImageProcessServicer):
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     imageprocess_pb2_grpc.add_ImageProcessServicer_to_server(ImageProcess(), server)
-    server.add_insecure_port('[::]:50051')
+    server.add_insecure_port('[::]:8080')
     server.start()
     server.wait_for_termination()
 

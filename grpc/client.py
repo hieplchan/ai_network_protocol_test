@@ -20,7 +20,7 @@ frame = cv2.imread(img_path)
 frame = cv2.cvtColor( frame, cv2.COLOR_RGB2GRAY )
 frame = bytes(frame)
 def run():
-    with grpc.insecure_channel('localhost:50051') as channel:
+    with grpc.insecure_channel('52.221.248.198:8080') as channel:
         stub = imageprocess_pb2_grpc.ImageProcessStub(channel)
         for i in range(n_sample):
             response = stub.ProcessImage(imageprocess_pb2.ImageProcessResquest(timestamp=str(int(time.time()*1000)), image=frame))

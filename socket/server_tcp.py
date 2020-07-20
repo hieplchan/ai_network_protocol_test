@@ -8,7 +8,7 @@ import zlib
 import time
 
 HOST='0.0.0.0'
-PORT=8080
+PORT=8081
 
 s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 print('Socket created')
@@ -46,6 +46,7 @@ while True:
     # Time stamp
     timestamp = int(data[4:17].decode('utf-8'))
     network_time_ms = current_timestamp - timestamp
+    # print('current_timestamp: {} - timestamp: {}'.format(current_timestamp, timestamp))
     print('network_time_ms: {}'.format(network_time_ms))
     # Write result file
     count += 1
@@ -56,7 +57,7 @@ while True:
     frame_data = data[17:total_size]
     frame = zlib.decompress(frame_data)
     frame = cv2.imdecode(np.frombuffer(frame, dtype=np.int8), cv2.IMREAD_COLOR)
-    cv2.imwrite('./' + str(count) + '.jpg', frame)
+    # cv2.imwrite('./' + str(count) + '.jpg', frame)
     # cv2.imshow('ImageWindow',frame)
     # cv2.waitKey(1)
 
