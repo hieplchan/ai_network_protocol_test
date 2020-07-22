@@ -44,10 +44,10 @@ while True:
     # Data receive
     while len(data) < total_size:
         data += socket_image_conn.recv(10)
+    timestamp_client_send = int(data[4:17].decode('utf-8'))
 
     # Get timestamp
     timestamp_server_receive = time.time()*1000
-    timestamp_client_send = int(data[4:17].decode('utf-8'))
 
     # Decode data to image
     frame_data = data[17:total_size]
@@ -59,7 +59,7 @@ while True:
     # cv2.waitKey(1)
 
     # Heavy workload
-    simulate_workload()
+    # simulate_workload()
 
     timestamp_server_processing_done = time.time()*1000
 

@@ -6,11 +6,12 @@ import time
 import pickle
 import zlib
 
-HOST='52.221.248.198'
-PORT_IMAGE=8080
-PORT_DATA=8081
-# PORT_IMAGE=8082
-# PORT_DATA=8083
+# HOST='52.221.248.198'
+HOST='hieplc.tk'
+# PORT_IMAGE=8080
+# PORT_DATA=8081
+PORT_IMAGE=8082
+PORT_DATA=8083
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect((HOST, PORT_DATA))

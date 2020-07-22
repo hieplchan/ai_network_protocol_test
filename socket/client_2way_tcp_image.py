@@ -6,14 +6,15 @@ import time
 import pickle
 import zlib
 
-HOST='52.221.248.198'
-PORT_IMAGE=8080
-PORT_DATA=8081
-# PORT_IMAGE=8082
-# PORT_DATA=8083
+# HOST='52.221.248.198'
+HOST='hieplc.tk'
+# PORT_IMAGE=8080
+# PORT_DATA=8081
+PORT_IMAGE=8082
+PORT_DATA=8083
 
 n_sample = 100
-delay = 0.5
+delay = 0.3
 
 # img_path = "../test_img/112x112.jpg"
 # size = 3790
