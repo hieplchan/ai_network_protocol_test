@@ -1,19 +1,11 @@
-import cv2
-import io
-import socket
-import struct
+import requests
+import json
 import time
-import pickle
-import zlib
+import base64
 
-HOST='52.221.248.198'
-PORT_IMAGE=8080
-PORT_DATA=8081
-# PORT_IMAGE=8082
-# PORT_DATA=8083
-
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect((HOST, PORT_DATA))
+url = 'http://52.221.248.198:8080/protocol_test/'
+n_sample = 100
+delay = 0.5
 
 time_upload = []
 time_process = []
@@ -23,18 +15,18 @@ time_total = []
 def average(time_series):
     return int(sum(time_series)/len(time_series))
 
-data = b""
-while True:
-    while len(data) < 39:
-        data += client_socket.recv(13)
-        if not data:
-            client_socket.close()
-            break
+with open("../test_img/640x640.jpg", "rb") as img_file:
+    base64_image = base64.b64encode(img_file.read()).decode('utf-8')
+
+for i in range(n_sample):
+    payload = {'timestamp': int(time.time()*1000), 'image': base64_image}
+    r = requests.post(url, json=payload)
+    print(r.json()['timestamp_client_send'])
 
     timestamp_client_receive = int(time.time()*1000)
-    timestamp_client_send = int(data[:13])
-    timestamp_server_receive = int(data[13:26])
-    timestamp_server_processing_done = int(data[26:])
+    timestamp_client_send = int(r.json()['timestamp_client_send'])
+    timestamp_server_receive = int(r.json()['timestamp_server_receive'])
+    timestamp_server_processing_done = int(r.json()['timestamp_server_processing_done'])
 
     time_upload.append(timestamp_server_receive - timestamp_client_send)
     time_process.append(timestamp_server_processing_done - timestamp_server_receive)
@@ -48,5 +40,3 @@ while True:
 
     print('Upload time avg: {} - Processing time avg: {} - Download time avg: {} - Total time avg: {}'
             .format(average(time_upload), average(time_process), average(time_download), average(time_total)))
-
-    data = data[46:]
