@@ -1,3 +1,6 @@
+# sudo timedatectl set-ntp off
+# sudo timedatectl set-ntp on
+
 import socket
 import sys
 import pickle
@@ -22,11 +25,13 @@ conn,addr=s.accept()
 
 data = b""
 payload_size = 4
-# msg_size = 3790
+msg_size = 3790
 # msg_size = 9824
-msg_size = 47684
+# msg_size = 47684
 
 total_size = payload_size + msg_size
+
+upload_time_ms = []
 
 count = 0
 while True:
@@ -40,17 +45,17 @@ while True:
     # print("msg_size: {}".format(msg_size))
 
     while len(data) < total_size:
-        data += conn.recv(4096)
+        data += conn.recv(10)
     current_timestamp = time.time()*1000
 
     # Time stamp
     timestamp = int(data[4:17].decode('utf-8'))
     network_time_ms = current_timestamp - timestamp
-    # print('current_timestamp: {} - timestamp: {}'.format(current_timestamp, timestamp))
+    upload_time_ms.append(network_time_ms)
     print('network_time_ms: {}'.format(network_time_ms))
     # Write result file
     count += 1
-    with open("result.csv", "a") as file_object:
+    with open("test4_640_asdad.csv", "a") as file_object:
         file_object.write('{},{}\n'.format(count, network_time_ms))
 
     # Image
@@ -63,3 +68,6 @@ while True:
 
     # Others
     data = data[total_size:]
+
+    # Average time
+    print('Average time: {}'.format(sum(upload_time_ms)/len(upload_time_ms)))
