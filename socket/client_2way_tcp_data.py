@@ -6,7 +6,7 @@ import time
 import pickle
 import zlib
 
-# HOST='52.221.248.198'
+# HOST='0.0.0.0'
 HOST='hieplc.tk'
 # PORT_IMAGE=8080
 # PORT_DATA=8081

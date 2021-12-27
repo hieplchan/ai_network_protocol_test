@@ -3,7 +3,7 @@ import json
 import time
 import base64
 
-# url = 'http://52.221.248.198:8080/protocol_test/'
+# url = 'http://0.0.0.0:8080/protocol_test/'
 url = 'http://hieplc.tk:8080/protocol_test/'
 n_sample = 100
 delay = 0.3
