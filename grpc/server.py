@@ -12,14 +12,15 @@ import imageprocess_pb2_grpc
 count = 0
 class ImageProcess(imageprocess_pb2_grpc.ImageProcessServicer):
     def ProcessImage(self, request, context):
+        print("Ping")
         global count
         current_timestamp = time.time()*1000
         network_time_ms = current_timestamp - int(request.timestamp)
         print('network_time_ms: {}'.format(network_time_ms))
         # Write result file
         count += 1
-        with open("result.txt", "a") as file_object:
-            file_object.write('{},{}\n'.format(count, network_time_ms))
+        # with open("result.txt", "a") as file_object:
+        #     file_object.write('{},{}\n'.format(count, network_time_ms))
 
         return imageprocess_pb2.ImageProcessResponse(message='Receive')
 

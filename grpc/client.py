@@ -20,15 +20,15 @@ frame = cv2.imread(img_path)
 frame = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY )
 frame = bytes(frame)
 def run():
-    with grpc.insecure_channel('0.0.0.0:8080') as channel:
+    with grpc.insecure_channel('192.168.32.103:8080') as channel:
         stub = imageprocess_pb2_grpc.ImageProcessStub(channel)
         start = time.time()
         for i in range(n_sample):
             _ = stub.ProcessImage(imageprocess_pb2.ImageProcessResquest(timestamp=str(int(time.time()*1000)), image=frame))
             time.sleep(delay)
         print(time.time() - start)
-        with open("grpc_call_result.txt", "a") as file_object:
-            file_object.write('sample = {}, took = {} seconds\n'.format(n_sample, time.time() - start))
+        # with open("grpc_call_result.txt", "a") as file_object:
+        #     file_object.write('sample = {}, took = {} seconds\n'.format(n_sample, time.time() - start))
 if __name__ == '__main__':
     logging.basicConfig()
     run()
