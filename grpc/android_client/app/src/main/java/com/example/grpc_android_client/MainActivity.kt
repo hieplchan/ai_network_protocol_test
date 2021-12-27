@@ -55,9 +55,14 @@ class MainActivity : AppCompatActivity() {
             .setTimestamp("123456789")
             .build()
 
+        val start = System.currentTimeMillis()
+
         val response = stub.processImage(request)
+
+        val stop = System.currentTimeMillis()
+
         try {
-            textView.text = response.message
+            textView.text = response.message + " " + (stop - start).toString() + " ms"
         } catch (e: Exception) {
             textView.text = e.message
         }
