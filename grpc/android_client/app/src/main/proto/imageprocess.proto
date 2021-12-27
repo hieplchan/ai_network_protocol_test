@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.imageprocess";
+option java_outer_classname = "ImageProcessProto";
+option objc_class_prefix = "IMG";
+
+package imageprocess;
+
+service ImageProcess {
+  rpc ProcessImage (ImageProcessResquest) returns (ImageProcessResponse) {}
+}
+
+message ImageProcessResquest {
+  string timestamp = 1;
+  bytes image = 2;
+}
+
+message ImageProcessResponse {
+  string message = 1;
+}
