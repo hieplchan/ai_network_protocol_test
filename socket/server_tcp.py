@@ -25,9 +25,9 @@ conn,addr=s.accept()
 
 data = b""
 payload_size = 4
-msg_size = 3790
+# msg_size = 3790
 # msg_size = 9824
-# msg_size = 47684
+msg_size = 47684
 
 total_size = payload_size + msg_size
 

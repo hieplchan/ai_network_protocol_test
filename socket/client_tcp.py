@@ -6,7 +6,7 @@ import time
 import pickle
 import zlib
 
-n_sample = 100
+n_sample = 200
 delay = 0.1
 
 # img_path = "../test_img/112x112.jpg"
@@ -19,7 +19,7 @@ img_path = "../test_img/640x640.jpg"
 size = 47684
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect(('52.221.248.198', 8080))
+client_socket.connect(('0.0.0.0', 8080))
 # client_socket.connect(('localhost', 8080))
 connection = client_socket.makefile('wb')
 
@@ -35,6 +35,8 @@ for i in range(n_sample):
     client_socket.sendall(struct.pack(">L", size) + data)
     print("{}: {}".format(img_counter, size))
     img_counter += 1
-    # time.sleep(delay)
+    time.sleep(delay)
 stop = time.time()
 print(stop - start)
+with open("socket_call_result.txt", "a") as file_object:
+    file_object.write('sample = {}, took = {} seconds\n'.format(n_sample, time.time() - start))
