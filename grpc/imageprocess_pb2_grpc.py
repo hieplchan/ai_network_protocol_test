@@ -54,6 +54,7 @@ class ImageProcess(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
@@ -62,4 +63,4 @@ class ImageProcess(object):
             imageprocess__pb2.ImageProcessResquest.SerializeToString,
             imageprocess__pb2.ImageProcessResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
